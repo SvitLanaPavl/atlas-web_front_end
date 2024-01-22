@@ -1,2 +1,1 @@
-@media (min-width: 992px) /* the largest I have - doesn't show me larger width */ 
-max-width: 960px;
+max-width: 1140px;
