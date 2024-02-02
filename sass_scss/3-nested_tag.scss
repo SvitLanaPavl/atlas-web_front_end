@@ -1,0 +1,9 @@
+$nomp: 0px;
+$margin: 10px;
+body {
+    margin: $nomp;
+    padding: $nomp;
+    p {
+        margin: $margin;
+    }
+}
