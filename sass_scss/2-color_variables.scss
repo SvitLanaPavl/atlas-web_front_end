@@ -1,0 +1,13 @@
+$color: #3D3D3D;
+$bgcolor: #6D6D6D;
+
+body, p {
+    color: $color;
+    background-color: $bgcolor;
+}
+p {
+    color: $color;
+}
+h2 {
+    background-color: $bgcolor;
+}
