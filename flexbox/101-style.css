@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    height: 35vh;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 90%;
+    height: 80%;
+    align-self: flex-end;
+}
+.box {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box1 {
+  background-color: rgb(24, 188, 24);
+  height: 25%;
+  width: 7%;
+  font-size: 1.5vw;
+}
+.box2 {
+    background-color: rgb(26, 142, 219);
+    height: 35%;
+    width: 10%;
+    font-size: 3vw;
+}
+.box3 {
+    background-color: rgb(53, 64, 82);
+    height: 60%; 
+    width: 20%;
+    font-size: 5vw; 
+}
+.box4 {
+    background-color: rgb(144, 95, 196);
+    height: 35%;
+    width: 10%;
+    font-size: 3vw;
+}
+.box5 {
+    background-color: rgb(239, 132, 18);
+    height: 25%;
+    width: 7%;
+    font-size: 1.5vw;
+}
