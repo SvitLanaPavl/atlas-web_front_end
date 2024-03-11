@@ -13,7 +13,7 @@
               const input = $('<input type="text" />');
               const inputSub = $('<input type="submit" />');
               const pagination = $('<ul id="pagination"></ul>');
-              const ul = $('<ul></ul>');
+              const ul = $('<ul id="results"></ul>');
               form.append(input, inputSub);
               $('body').append(form, ul, pagination);
               form.submit((event) => {
@@ -51,11 +51,22 @@
   
               const snippetP = $('<p></p>').text(cleanSnippet);
               li.append(titleP, snippetP);
-              $('ul').append(li);
+              $('#results').append(li);
             }
-            buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+            function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
               const pagination_list = $('#pagination');
               pagination_list.empty();
+              const totalPages = Math.ceil(numberOfItems / itemsPerPage);
+              for (let i = 0; i < totalPages; i++) {
+                if (i * itemsPerPage === currentOffset) {
+                  li.css('font-weight', 'bold');
+                }
+                li.css('cursor', 'pointer').css('margin-left', '10px');
+                li.click(() => {
+                  queryWikipedia($('#search').val(), i * itemsPerPage);
+                });
+                pagination_list.append(li);
+              }
 
             }
             createSearchForm();
