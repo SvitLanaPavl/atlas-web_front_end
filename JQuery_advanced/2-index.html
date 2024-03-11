@@ -9,29 +9,28 @@
         <script type="application/javascript">
           $(document).ready(() => {
             function createFamilyTree() {
-              const table = $('<table></table>');
-              const thead = $('<thead></thead>');
-              const theadRow = $('<tr></tr>');
-
-              const firstName = $('<th>First Name</th>');
-              const lastName = $('<th>Last Name</th>')
-              theadRow.append(firstName, lastName);
-              thead.append(theadRow);
-
-              const tbody = $('<tbody></tbody>');
-              const data = [
-                {firstName: 'Guillaume', lastName: 'Salva'},
-                {firstName: 'Paulette', lastName: 'Salva'},
-                {firstName: 'Antoine', lastName: 'Salva'}
-              ];
-              data.forEach((member) => {
-                const row = $('<tr></tr>');
-                const nameTD = $(`<td>${member.firstName}</td>`);
-                const lastTD = $(`<td>${member.lastName}</td>`);
-                row.append(nameTD, lastTD);
-                tbody.append(row);
-              });
-              table.append(thead, tbody);
+              const table = $('<table>\
+                <thead>\
+                  <tr>\
+                    <th>First Name</th>\
+                    <th>Last Name</th>\
+                  <tr>\
+                </thead>\
+                <tbody>\
+                  <tr>\
+                    <td>Guillaume</td>\
+                    <td>Salva</td>\
+                  </tr>\
+                  <tr>\
+                    <td>Paulette</td>\
+                    <td>Salva</td>\
+                  </tr>\
+                  <tr>\
+                    <td>Antoine</td>\
+                    <td>Salva</td>\
+                  </tr>\
+                </tbody>\
+              </table>');
               $('body').append(table);
             }
             createFamilyTree();
