@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Task 7</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="application/javascript">
+          $(document).ready(() => {
+            function createSearchForm() {
+              const form = $('<form></form>');
+              const input = $('<input type="text" />');
+              const inputSub = $('<input type="submit" />');
+              const ul = $('<ul></ul>');
+              form.append(input, inputSub);
+              $('body').append(form, ul);
+              form.submit((event) => {
+                event.preventDefault();
+                const inputVal = input.val();
+                queryWikipedia(inputVal);
+              });
+            }
+            function queryWikipedia(search) {
+              const dataURL = `https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${search}&origin=*`
+              $.ajax ({
+                url: dataURL,
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                  if (response.query && response.query.search) {
+                    response.query.search.forEach(function(result) {
+                      addNewArticle(result.pageid.toString(), result.title, result.snippet)
+                    });
+                  }
+                },
+                error: function(xhr, status, error) {
+                  console.error('Error', error);
+                }
+
+              });
+            }
+            function addNewArticle(id, title, snippet) {
+              const li = $('<li></li>');
+              const span = $('<span></span>').text(`${id} - `);
+              const bold = $('<b></b>').text(title);
+              const titleP = $('<p></p>').append(span, bold);
+              const cleanSnippet = snippet.replace(/<span class="searchmatch">(.*?)<\/span>/g, '$1');
+  
+              const snippetP = $('<p></p>').text(cleanSnippet);
+              li.append(titleP, snippetP);
+              $('ul').append(li);
+            }
+            createSearchForm();
+          })
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>
