@@ -54,18 +54,19 @@
               $('#results').append(li);
             }
             function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
-              const pagination_list = $('#pagination');
-              pagination_list.empty();
+              const pagination = $('#pagination');
+              pagination.empty();
               const totalPages = Math.ceil(numberOfItems / itemsPerPage);
               for (let i = 0; i < totalPages; i++) {
+                const li = $('<li></li>').text(i + 1);
                 if (i * itemsPerPage === currentOffset) {
                   li.css('font-weight', 'bold');
                 }
-                li.css('cursor', 'pointer').css('margin-left', '10px');
+                li.css({'cursor': 'pointer', 'margin-left': '10px', 'display': 'inline', 'list-style': 'none'});
                 li.click(() => {
                   queryWikipedia($('#search').val(), i * itemsPerPage);
                 });
-                pagination_list.append(li);
+                pagination.append(li);
               }
 
             }
