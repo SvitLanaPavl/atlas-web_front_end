@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <title>Task 8</title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="application/javascript">
+          $(document).ready(() => {
+            function addPostRow(data) {
+              const para = $('<p></p>');
+              const span = $('<span></span>').text(`Post created with id ${data.id}, title: ${data.title}, author: ${data.author}`);
+              para.append(span);
+              $('body').append(para);
+            }
+            function listPosts() {
+              $.get('http://localhost:3000/posts', (response) => {
+                response.forEach((post) => {
+                  addPostRow(post);
+                });
+              }).fail(() => {
+                alert('Server Error');
+              })
+            }
+            listPosts();
+          })
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>
