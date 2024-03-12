@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+</head>
+<body>
+  <h1>Login to the website</h1>
+  <input type="text" id="firstname" placeholder="Firstname" onkeypress="checkEnter(event)"/>
+  <input type="text" id="email" placeholder="Email" onkeypress="checkEnter(event)"/>
+  <button onclick="setCookies()">Log me in</button>
+  <h1>Cookies</h1>
+  <button onclick="showCookies()">Show cookies</button>
+  <script>
+    function setCookies() {
+      const firstnameInp = document.getElementById('firstname');
+      const emailInp = document.getElementById('email');
+      const firstname = firstnameInp.value;
+      const email = emailInp.value;
+
+      const expiration = new Date();
+      expiration.setDate(expiration.getDate() + 10);
+
+      document.cookie = `firstname=${firstname}; expires=${expiration.toUTCString()}`;
+      document.cookie = `email=${email}; expires=${expiration.toUTCString()}`;
+      firstnameInp.value = '';
+      emailInp.value = '';
+    }
+    function showCookies() {
+      const cookies = document.cookie.split(';');
+      const para = document.createElement('p');
+      para.innerHTML = '';
+      cookies.forEach((cookie) => {
+        const [name, val] = cookie.trim().split('=');
+        para.innerHTML += `${name}: ${val} `;
+      });
+      document.body.appendChild(para);
+    }
+    function checkEnter(event) {
+            if (event.key === 'Enter') {
+                setCookies();
+            }
+    }
+  </script>
+</body>
+</html>

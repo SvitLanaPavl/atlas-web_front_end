@@ -7,8 +7,8 @@
 </head>
 <body>
   <h1>Login to the website</h1>
-  <input type="text" id="firstname" placeholder="Firstname"/>
-  <input type="text" id="email" placeholder="Email"/>
+  <input type="text" id="firstname" placeholder="Firstname" onkeypress="checkEnter(event)"/>
+  <input type="text" id="email" placeholder="Email" onkeypress="checkEnter(event)"/>
   <button onclick="setCookies()">Log me in</button>
   <h1>Cookies</h1>
   <button onclick="showCookies()">Show cookies</button>
@@ -32,6 +32,11 @@
         para.innerHTML += `${name}: ${val} `;
       });
       document.body.appendChild(para);
+    }
+    function checkEnter(event) {
+            if (event.key === 'Enter') {
+                setCookies();
+            }
     }
   </script>
 </body>
