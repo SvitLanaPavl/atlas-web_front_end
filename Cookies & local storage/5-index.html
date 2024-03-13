@@ -40,15 +40,22 @@
       }
     function displayCart() {
       const storageItems = Object.keys(localStorage);
-      const para = document.createElement('p');
-      if (storageItems.length === 0) para.textContent = '';
-      else {
-        para.textContent = `You previously had ${storageItems.length} items in your cart`;
+      let para = document.getElementById('cartInfo');
+      if (!para) {
+        para = document.createElement('p');
+        para.id = 'cartInfo';
+        document.body.appendChild(para);
       }
-      document.body.appendChild(para);
+      para.textContent = storageItems.length === 0 ? '' : `You previously had ${storageItems.length} items in your cart`;
       }
-      window.onload = createStore;
-    
+      function clearStorage() {
+        localStorage.clear();
+        displayCart();
+      }
+    createStore();
+    displayCart();
+
   </script>
+  <button onclick="clearStorage()">Clear Cart</button>
 </body>
 </html>
