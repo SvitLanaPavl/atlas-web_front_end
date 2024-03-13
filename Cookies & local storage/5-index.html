@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+</head>
+<body>
+  <script>
+    const availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+    const isLocalStorageAvailable = () => {
+      try {
+        const key = `__storage__test`;
+        window.localStorage.setItem(key, null);
+        window.localStorage.removeItem(key);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+    if (!isLocalStorageAvailable()) {
+      alert('Sorry, your browser does not support Web storage. Try again with a better one');
+    } else {
+      function addItemToCart(item) {
+        localStorage.setItem(item, 'true');
+      }
+      function createStore() {
+        const ul = document.createElement('ul');
+        availableItems.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          li.onclick = () => addItemToCart(item);
+          ul.appendChild(li);
+        })
+        document.body.appendChild(ul);
+      }
+      function displayCart() {
+        const storageItems = Object.keys(localStorage);
+        if (storageItems.length === 0) return;
+        const para = document.createElement('p');
+        para.textContent = `You previously had ${storageItems.length} items in your cart`;
+        document.body.appendChild(para);
+      }
+      createStore();
+      displayCart();
+    }
+    
+  </script>
+</body>
+</html>
