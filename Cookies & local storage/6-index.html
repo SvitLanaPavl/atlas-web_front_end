@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+</head>
+<body>
+  <script>
+    const availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+    function addItemToCart(item) {
+      sessionStorage.setItem(item, 'true');
+      displayCart();
+    }
+    function createStore() {
+      const ul = document.createElement('ul');
+      availableItems.forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        li.onclick = () => addItemToCart(item);
+        ul.appendChild(li);
+      });
+      document.body.appendChild(ul);
+      }
+    function displayCart() {
+      const storageItems = Object.keys(sessionStorage);
+      let para = document.getElementById('cartInfo');
+      if (!para) {
+        para = document.createElement('p');
+        para.id = 'cartInfo';
+        document.body.appendChild(para);
+      }
+      para.textContent = storageItems.length === 0 ? '' : `You previously had ${storageItems.length} items in your cart`;
+      }
+      function clearStorage() {
+        sessionStorage.clear();
+        displayCart();
+      }
+    createStore();
+    displayCart();
+
+  </script>
+  <button onclick="clearStorage()">Clear Cart</button>
+</body>
+</html>
