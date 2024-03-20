@@ -60,9 +60,13 @@
       document.body.appendChild(uList);
     }
     function displayCart() {
-      const yourCart = document.createElement('h2');
-      yourCart.textContent = 'Your cart:';
-      document.body.appendChild(yourCart);
+      let yourCart = document.getElementById('your-cart');
+      if (!yourCart) {
+        yourCart = document.createElement('h2');
+        yourCart.id = 'your-cart';
+        yourCart.textContent = 'Your cart:';
+        document.body.appendChild(yourCart);
+      }
       let cartDiv = document.getElementById('cart-div');
       if (!cartDiv) {
         cartDiv = document.createElement('div');
@@ -72,7 +76,7 @@
         cartDiv.innerHTML = '';
       }
       updateCart();
-      }
+    }
     function updateCart() {
       const cart = getCartFromStorage();
       const storageItems = Object.keys(cart);
@@ -83,6 +87,12 @@
         li.textContent = 'Your cart is empty';
         ul.appendChild(li);
       } else {
+        if (storageItems.length > 0) {
+          const clearCartLi = document.createElement('li');
+          clearCartLi.textContent = 'Clear my cart';
+          clearCartLi.onclick = clearCart;
+          ul.appendChild(clearCartLi);
+        }
         storageItems.forEach((item) => {
           const li = document.createElement('li');
           li.textContent = `${item} x ${cart[item]}`;
