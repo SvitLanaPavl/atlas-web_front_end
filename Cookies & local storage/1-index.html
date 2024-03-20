@@ -30,11 +30,22 @@
     function showCookies() {
       const cookies = document.cookie.split(';');
       const para = document.createElement('p');
-      para.innerHTML = '';
+      para.innerHTML = 'Cookies: ';
+
+      let firstnameCookie = '';
+      let emailCookie = '';
+
       cookies.forEach((cookie) => {
         const [name, val] = cookie.trim().split('=');
-        para.innerHTML += `${name}: ${val} `;
+        if (name === 'firstname') {
+          firstnameCookie = `${name}=${val}; `;
+        }
+        if (name === 'email') {
+          emailCookie = `${name}=${val}`;
+        }
       });
+
+      para.innerHTML += firstnameCookie + emailCookie;
       document.body.appendChild(para);
     }
     function checkEnter(event) {
