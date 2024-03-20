@@ -32,7 +32,7 @@
         para.id = 'cartInfo';
         document.body.appendChild(para);
       }
-      para.textContent = storageItems.length === 0 ? '' : `You previously had ${storageItems.length} items in your cart`;
+      para.textContent = storageItems.length === 0 ? '' : `You previously had ${storageItems.length} item${storageItems.length > 1 ? 's' : ''} in your cart`;
       }
       function clearStorage() {
         sessionStorage.clear();
