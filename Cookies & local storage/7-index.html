@@ -27,10 +27,6 @@
       }
     }
     function addItemToCart(item) {
-      if (!isSessionStorageAvailable()) {
-        alert('Sorry, your browser does not support Web storage. Try again with a better one');
-        return;
-      }
       let cart = getCartFromStorage();
       if (cart[item]) {
         cart[item]++;
@@ -70,7 +66,7 @@
       let cartDiv = document.getElementById('cart-div');
       if (!cartDiv) {
         cartDiv = document.createElement('div');
-        cartDiv.id = 'card-div';
+        cartDiv.id = 'cart-div';
         document.body.appendChild(cartDiv);
       } else {
         cartDiv.innerHTML = '';
@@ -87,15 +83,23 @@
         li.textContent = 'Your cart is empty';
         ul.appendChild(li);
       } else {
-        cart.forEach((item) => {
+        storageItems.forEach((item) => {
           const li = document.createElement('li');
           li.textContent = `${item} x ${cart[item]}`;
-          const removeBtn = document.createElement('button');
-          removeBtn.onclick = () => removeItem(item);
+          const removeBtn = document.createElement('span');
+          removeBtn.textContent = ' (remove)';
+          removeBtn.onclick = () => removeItemfromCart(item);
           li.appendChild(removeBtn);
           ul.appendChild(li);
         })
       }
+      cartDiv.appendChild(ul);
+    }
+    if (!isSessionStorageAvailable()) {
+      alert('Sorry, your browser does not support Web storage. Try again with a better one');
+    } else {
+      createStore();
+      displayCart();
     }
   </script>
 </body>
